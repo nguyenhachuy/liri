@@ -44,9 +44,10 @@ function command(arguments) {
 				}) 
 			break;
 		case 'spotify-this-song':
+			var song = arguments[1] ? arguments[1]: 'The Ace';
 			params = {
 				type: 'track',
-				query: arguments[1]
+				query: song
 			};
 			spotify.search(params)
 				.then(response => {
@@ -58,7 +59,7 @@ function command(arguments) {
 					var name = response.name;
 					var preview = response.preview_url;
 					var album = response.album.name;
-					console.log(name + ' ' + preview + ' ' + album);
+					console.log(name + '\n' + preview + '\n' + album + '\n');
 
 				})
 				.catch(error => {
@@ -67,7 +68,8 @@ function command(arguments) {
 			break;
 		case 'movie-this':
 			var queryURL = 'http://www.omdbapi.com/?apikey=40e9cece&t=';
-			queryURL += arguments[1];
+			if(arguments[1]) queryURL += arguments[1];
+			else queryURL += 'Mr.Nobody';
 			request(queryURL, (error, response, body) => {
 				// console.log(response);
 				body = JSON.parse(body);
