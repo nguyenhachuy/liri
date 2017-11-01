@@ -6,7 +6,7 @@ var access_token_secret = keys.access_token_secret;
 
 var Twitter = require('twitter');
 var Spotify = require('node-spotify-api');
-
+var request = require('request');
 var client = new Twitter({
 	consumer_key: consumer_key,
 	consumer_secret: consumer_secret,
@@ -19,9 +19,10 @@ var spotify = new Spotify({
 	secret: 'f7cfa5010d9d40df91e459cf151d4975'
 });
 
-console.log(process.argv);
 var args = process.argv.slice(2);
 
+//Do some input processing
+// switch(args[2])
 
 var params = {
 	screen_name: 'GusGusnguyen',
@@ -36,23 +37,51 @@ var params = {
 // 	.catch(error => {
 // 		console.log(error);
 // 	}) 
-params = {
-	type: 'track',
-	query: 'All Of The Lights'
-};
-spotify.search(params)
-	.then(response => {
-		response = response.tracks.items[0];
-		var artists = response.artists;
-		artists.forEach(artist => {
-			console.log(artist.name);
-		});
-		var name = response.name;
-		var preview = response.preview_url;
-		var album = response.album.name;
-		console.log(name + ' ' + preview + ' ' + album);
+// params = {
+// 	type: 'track',
+// 	query: 'All Of The Lights'
+// };
+// spotify.search(params)
+// 	.then(response => {
+// 		response = response.tracks.items[0];
+// 		var artists = response.artists;
+// 		artists.forEach(artist => {
+// 			console.log(artist.name);
+// 		});
+// 		var name = response.name;
+// 		var preview = response.preview_url;
+// 		var album = response.album.name;
+// 		console.log(name + ' ' + preview + ' ' + album);
 
-	})
-	.catch(error => {
-		console.log(error);
-	})
+// 	})
+// 	.catch(error => {
+// 		console.log(error);
+// 	})
+
+// var queryURL = 'http://www.omdbapi.com/?apikey=40e9cece&t=Mulan';
+
+// request(queryURL, (error, response, body) => {
+// 	// console.log(response);
+// 	body = JSON.parse(body);
+// 	// console.log(error);
+// 	var title = body.Title;
+// 	var year = body.Year;
+// 	var imdb_rating = body.imdbRating;
+// 	var rotten_rating = body.Ratings[1].Value;
+// 	var country = body.Country;
+// 	var language = body.Language;
+// 	var plot = body.Plot;
+// 	var actors = body.Actors;
+
+// 	var output = {
+// 		title: title,
+// 		year: year,
+// 		imdb_rating: imdb_rating,
+// 		rotten_rating: rotten_rating,
+// 		country: country,
+// 		language: language,
+// 		plot: plot,
+// 		actors: actors
+// 	}
+// 	console.log(output);
+// });
